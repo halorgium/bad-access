@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -e
+
+LOCKED_USER=$1
+if [ -z $LOCKED_USER ]; then
+  echo "Provide the username of the locked user"
+  echo
+  echo "Usage: $(basename $0) locked-user"
+
+  exit 1
+fi
+
+echo "Using $LOCKED_USER as the locked user"
+echo $LOCKED_USER > locked-user
+
+if [ ! -d tmp ]; then
+  mkdir tmp
+fi
+
+if [ ! -f tmp/bad ]; then
+  touch tmp/bad{,count}
+  chown $LOCKED_USER tmp/bad{,count}
+fi

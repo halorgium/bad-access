@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [ ! -f locked-user ]; then
+  echo "Run setup to configure"
+
+  exit 1
+fi
+
+LOCKED_USER=$(cat locked-user)
+
+echo "Using $LOCKED_USER as the locked user"
+
+echo "Run ./write-check.rb"
+
+sudo su $LOCKED_USER -s bash
